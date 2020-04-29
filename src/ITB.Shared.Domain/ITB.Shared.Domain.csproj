@@ -8,7 +8,7 @@
     <Authors>IT Band Systems</Authors>
     <PackageId>ITB.Shared.Domain</PackageId>
     <RepositoryUrl>https://github.com/it-band/ITB.Shared</RepositoryUrl>
-    <Description>Shared ITB models for Domain logic</Description>
+    <Description>Shared ITB models for domain logic</Description>
     <Version>1.0.1</Version>
   </PropertyGroup>
 
