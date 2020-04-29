@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company>IT Band Systems</Company>
+    <Product></Product>
+    <Authors>IT Band Systems</Authors>
+    <PackageId>ITB.Shared.Domain</PackageId>
+    <RepositoryUrl>https://github.com/it-band/ITB.Shared</RepositoryUrl>
+  </PropertyGroup>
+
+</Project>
