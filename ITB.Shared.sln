@@ -14,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITB.Shared.Domain", "src\IT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITB.ResultModel", "src\ITB.Result\ITB.ResultModel.csproj", "{054BD802-D384-4B3C-807D-86DFD630BF6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITB.ApiResult", "src\ITB.ApiResult\ITB.ApiResult.csproj", "{25711FB5-ED5A-4808-85AE-E60ED6485D5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITB.ApiResultModel", "src\ITB.ApiResult\ITB.ApiResultModel.csproj", "{25711FB5-ED5A-4808-85AE-E60ED6485D5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

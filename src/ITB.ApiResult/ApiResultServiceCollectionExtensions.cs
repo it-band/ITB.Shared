@@ -1,4 +1,5 @@
 ﻿using System;
+using ITB.ApiResultModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 

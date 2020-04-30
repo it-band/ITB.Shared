@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
+using ITB.ApiResult;
 using ITB.ResultModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace ITB.ApiResult
+namespace ITB.ApiResultModel
 {
     public class ApiResult : IActionResult
     {
