@@ -9,7 +9,7 @@ namespace ITB.ApiResultModel
 {
     public class ApiResult : IActionResult
     {
-        public object Value { get; set; }
+        public Result Value { get; set; }
 
         public int? StatusCode { get; set; }
 
@@ -35,7 +35,7 @@ namespace ITB.ApiResultModel
 
     public class ApiResultOptions
     {
-        public Func<ApiResult, int> StatusCodeAccessor { get; set; } = result => result.StatusCode ?? ((Result)result.Value).GetStatusCode();
+        public Func<ApiResult, int> StatusCodeAccessor { get; set; } = result => result.StatusCode ?? result.Value.GetStatusCode();
     }
 
     public class ApiResultExecutor
