@@ -1,7 +1,7 @@
 ﻿using ITB.ResultModel;
 using Microsoft.AspNetCore.Http;
 
-namespace ITB.ApiResult
+namespace ITB.ApiResultModel
 {
     public static  class ApiResultResultExtensions
     {

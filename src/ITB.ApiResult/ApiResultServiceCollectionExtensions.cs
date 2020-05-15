@@ -1,9 +1,8 @@
 ﻿using System;
-using ITB.ApiResultModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace ITB.ApiResult
+namespace ITB.ApiResultModel
 {
     public static class ApiResultSetup
     {

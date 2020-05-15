@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ITB.ApiResult;
 using ITB.ResultModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +9,7 @@ namespace ITB.ApiResultModel
 {
     public class ApiResult : IActionResult
     {
-        public Result Value { get; set; }
+        public object Value { get; set; }
 
         public int? StatusCode { get; set; }
 
