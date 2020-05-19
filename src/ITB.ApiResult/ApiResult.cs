@@ -33,7 +33,7 @@ namespace ITB.ApiResultModel
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
 
-            await context.HttpContext.RequestServices.GetRequiredService<ApiResultExecutor>().ExecuteAsync(context, this);
+            await context.HttpContext.RequestServices.GetRequiredService<IActionResultExecutor<ApiResult>>().ExecuteAsync(context, this);
         }
     }
 
