@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -6,14 +6,9 @@ namespace ITB.ApiResultModel
 {
     public static class ApiResultSetup
     {
-        public static IServiceCollection AddApiResult(this IServiceCollection services, Action<ApiResultOptions> setupAction = null)
+        public static IServiceCollection AddApiResult(this IServiceCollection services)
         {
-            services.TryAddSingleton<ApiResultExecutor>();
-
-            if (setupAction != null)
-            {
-                services.Configure(setupAction);
-            }
+            services.TryAddSingleton(typeof(IActionResultExecutor<ApiResult>), typeof(ApiResultExecutor));
 
             return services;
         }

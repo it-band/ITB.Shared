@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using ITB.ResultModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.Net.Http.Headers;
 
 namespace ITB.ApiResultModel
 {
-    public class ApiResult : IActionResult
+    public class ApiResult : ActionResult, IStatusCodeActionResult
     {
         public Result Value { get; set; }
 
@@ -16,7 +20,7 @@ namespace ITB.ApiResultModel
         public ApiResult(Result value, int? statusCode = null)
         {
             Value = value;
-            StatusCode = statusCode;
+            StatusCode = statusCode ?? value.GetStatusCode();
         }
 
         public static implicit operator ApiResult(Result value)
@@ -24,7 +28,7 @@ namespace ITB.ApiResultModel
             return new ApiResult(value);
         }
 
-        public async Task ExecuteResultAsync(ActionContext context)
+        public override async Task ExecuteResultAsync(ActionContext context)
         {
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
@@ -33,28 +37,46 @@ namespace ITB.ApiResultModel
         }
     }
 
-    public class ApiResultOptions
+    public class ApiResultExecutor : IActionResultExecutor<ApiResult>
     {
-        public Func<ApiResult, int> StatusCodeAccessor { get; set; } = result => result.StatusCode ?? result.Value.GetStatusCode();
-    }
-
-    public class ApiResultExecutor
-    {
-        private readonly IOptions<ApiResultOptions> _options;
-
-        public ApiResultExecutor(IOptions<ApiResultOptions> options)
+        private static readonly string DefaultContentType = new MediaTypeHeaderValue("application/json")
         {
-            _options = options;
+            Encoding = Encoding.UTF8
+        }.ToString();
+
+        private readonly JsonOptions _options;
+        public ApiResultExecutor(IOptions<JsonOptions> options)
+        {
+            _options = options.Value;
         }
 
         public virtual async Task ExecuteAsync(ActionContext context, ApiResult result)
         {
-            var jsonResult = new JsonResult(result.Value)
+            if (context == null)
             {
-                StatusCode = _options.Value.StatusCodeAccessor(result)
-            };
+                throw new ArgumentNullException(nameof(context));
+            }
 
-            await jsonResult.ExecuteResultAsync(context);
+            if (result == null)
+            {
+                throw new ArgumentNullException(nameof(result));
+            }
+
+            var jsonSerializerOptions = _options.JsonSerializerOptions;
+
+            var response = context.HttpContext.Response;
+
+            response.ContentType = DefaultContentType;
+
+            if (result.StatusCode != null)
+            {
+                response.StatusCode = result.StatusCode.Value;
+            }
+
+            // Keep this code in sync with SystemTextJsonOutputFormatter
+            var responseStream = response.Body;
+            await JsonSerializer.SerializeAsync<object>(responseStream, result.Value, jsonSerializerOptions);
+            await responseStream.FlushAsync();
         }
     }
 }
