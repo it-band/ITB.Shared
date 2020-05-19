@@ -1,30 +1,21 @@
 ﻿using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using ITB.ResultModel;
 
 namespace ITB.ApiResultModel
 {
     // Example of how to implement DerivedTypeJsonConverter
-    public class FailureJsonConverter : DerivedTypeJsonConverter<Failure>
+    public class FailureJsonConverter : JsonConverter<Failure>
     {
-        protected override Type NameToType(string typeName)
+        public override Failure Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return typeName switch
-            {
-                nameof(Failure) => typeof(Failure),
-                nameof(NotFoundFailure) => typeof(NotFoundFailure),
-                nameof(ValidationFailure) => typeof(ValidationFailure),
-                nameof(ExceptionFailure) => typeof(ExceptionFailure),
-                nameof(UnauthorizedFailure) => typeof(UnauthorizedFailure),
-                nameof(ForbiddenFailure) => typeof(ForbiddenFailure),
-
-                // TODO: Create a case for each derived type
-                _ => throw new NotImplementedException($"Unsupported type string \"{typeName}\".")
-            };
+            throw new NotImplementedException();
         }
 
-        protected override string TypeToName(Type type)
+        public override void Write(Utf8JsonWriter writer, Failure value, JsonSerializerOptions options)
         {
-            return type.Name;
+            JsonSerializer.Serialize(writer, value, value.GetType(), options);
         }
     }
 }
