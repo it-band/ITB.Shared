@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>IT Band Systems</Company>
     <Product></Product>
@@ -9,7 +9,7 @@
     <PackageId>ITB.Shared.Domain</PackageId>
     <RepositoryUrl>https://github.com/it-band/ITB.Shared.git</RepositoryUrl>
     <Description>Shared ITB models for domain logic</Description>
-    <Version>1.0.4</Version>
+    <Version>1.6.0</Version>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
